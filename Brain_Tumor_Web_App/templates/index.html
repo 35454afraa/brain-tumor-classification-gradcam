@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brain Tumor Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🧠 Brain Tumor Classification</h1>
+
+    <h2>Using EfficientNetB0 + Grad-CAM</h2>
+
+    <hr>
+
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+
+        <input type="file" name="file" required>
+
+        <br><br>
+
+        <button type="submit">Predict</button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h2>Prediction Result</h2>
+
+        <h3>Tumor Type</h3>
+
+        <p class="prediction">{{ prediction }}</p>
+
+        <h3>Confidence</h3>
+
+        <p class="confidence">{{ confidence }}%</p>
+
+        <hr>
+
+        <h3>Original MRI</h3>
+
+        <img src="{{ image_path }}" width="300">
+
+        <hr>
+
+        <h3>Grad-CAM Heatmap</h3>
+
+        <img src="{{ heatmap_path }}" width="300">
+
+        <hr>
+
+        <h3>Overlay Image</h3>
+
+        <img src="{{ overlay_path }}" width="300">
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
